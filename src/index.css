@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-content-lg-width {
+    width: calc(100vw - 350px);
+}
+
+.bg-primary {
+    background-color: #0B192C;
+}
+
+.btn-primary {
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    opacity: .75;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    max-width: none;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    opacity: .75;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-input-div:focus-within {
+    border: 2px solid #0B192C;
+}
+
+.overlay-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(49, 55, 73, 0.632);
+}
+
+
+/* Calendar */
+.calender-cell-button {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(224, 224, 224, 0.74);
+    flex-grow: 1;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000000;
+}
+
+.calender-cell-button:hover {
+    box-shadow: 0px 7px 15px 2px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.calender-cell-button:disabled {
+    font-weight: bold;
+    background: #eeecec;
+    color: rgb(0, 0, 0);
+    box-shadow: none;
+    transform: none;
+}
+
+.calender-selected-cell {
+    background-color: rgb(188, 244, 244);
+}

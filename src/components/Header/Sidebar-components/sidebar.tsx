@@ -1,6 +1,13 @@
-import { FiX } from "react-icons/fi";
+import { useCallback } from "react";
+import { useNavigate } from "react-router";
+import { FiX, FiLogOut } from "react-icons/fi";
+import { Tooltip } from "react-tooltip";
+
+import { menuItems, IMenuItems } from "../../../routes/menu-items";
+import { useAppContext } from "../../../context/app-context";
 import { MenuItem } from "./menu-item";
-import { menuItems, IMenuItems } from "../menu-items";
+import { clearToken } from "../../../utils/local-storage-service";
+import PathConstants from "../../../routes/pathConstants";
 
 export interface SideBarProps {
   showSidebar: boolean;
@@ -13,6 +20,8 @@ export const SideBar: React.FC<SideBarProps> = ({
   setter,
   isMediumDevice,
 }) => {
+  const { hasValidToken } = useAppContext();
+  const navigate = useNavigate();
   const wrapperDivClassName =
     "bg-primary h-full w-full md:w-[500px] lg:w-[350px] transform transition-transform ease-in-out duration-500 fixed lg:static top-0 bottom-0 left-0 z-40";
 
@@ -29,6 +38,24 @@ export const SideBar: React.FC<SideBarProps> = ({
     );
   };
 
+  const renderLogoutButton = useCallback(() => {
+    return (
+      <button
+        id="logout-btn"
+        className="text-[#FFF] text-[2.3rem]"
+        aria-label="logout button"
+        onClick={handleLogout}
+      >
+        <FiLogOut />
+      </button>
+    );
+  }, []);
+
+  const handleLogout = (): void => {
+    clearToken();
+    navigate(PathConstants.LOGIN);
+  };
+
   return (
     <>
       <div className={`${wrapperDivClassName} ${appendWrapperDivClassName}`}>
@@ -42,11 +69,33 @@ export const SideBar: React.FC<SideBarProps> = ({
               className="rounded-full"
             />
           </a>
-          {isMediumDevice && (
-            <button className="text-[#FFF] text-[2.3rem]" onClick={setter}>
-              <FiX />
-            </button>
-          )}
+          <div className="flex flex-row justify-evenly items-center">
+            {hasValidToken && renderLogoutButton()}
+            <Tooltip
+              anchorSelect="#logout-btn"
+              className="text-white"
+              place="bottom"
+            >
+              Logout
+            </Tooltip>
+            {isMediumDevice && (
+              <button
+                id="close-btn"
+                aria-label="sidebar close button"
+                className="text-[#FFF] text-[2.3rem]"
+                onClick={setter}
+              >
+                <FiX />
+              </button>
+            )}
+            <Tooltip
+              anchorSelect="#close-btn"
+              className="text-white"
+              place="bottom"
+            >
+              close
+            </Tooltip>
+          </div>
         </div>
         <div className="flex flex-col">
           {menuItems?.length > 0 &&

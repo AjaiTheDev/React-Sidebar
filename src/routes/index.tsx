@@ -1,11 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { ReactElement } from "react";
+import React from "react";
 import PathConstants from "./pathConstants";
-
-interface IRoutes {
-  path: string;
-  element: ReactElement;
-}
+import { menuItems } from "./menu-items";
+import AuthGuard from "../utils/guards/auth-guard";
 
 /**
  * Lazy-loaded components for the routes.
@@ -13,26 +10,20 @@ interface IRoutes {
  * @constant
  * @type {React.LazyExoticComponent<React.FC>}
  */
-const Home  = React.lazy(() => import("../pages/home"));
+const Home = React.lazy(() => import("../pages/home"));
 const About = React.lazy(() => import("../pages/about"));
 
+const componentsMap: Record<string, JSX.Element> = {
+  [PathConstants.HOME]: <Home />,
+  [PathConstants.ABOUT]: <About />,
+};
 
-/**
- * An array of route definitions for the application.
- *
- * @type {IRoutes[]}
- * @property {string} path - The path for the route.
- * @property {JSX.Element} element - The component to render for the route.
- *
- * @example
- * const routes = [
- *   { path: PathConstants.HOME, element: <Home /> },
- *   { path: PathConstants.ABOUT, element: <About /> },
- * ];
- */
-const routes: IRoutes[] = [
-  { path: PathConstants.HOME, element: <Home /> },
-  { path: PathConstants.ABOUT, element: <About /> },
+// Generate routes dynamically
+export const routes = [
+  ...menuItems.map(({ route, roles }) => ({
+    path: route,
+    element: <AuthGuard roles={roles}>{componentsMap[route]}</AuthGuard>,
+  })),
 ];
 
 export default routes;

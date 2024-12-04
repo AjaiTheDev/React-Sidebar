@@ -118,3 +118,9 @@
 .calender-selected-cell {
     background-color: rgb(188, 244, 244);
 }
+
+.input-field {
+    padding: 10px 7px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

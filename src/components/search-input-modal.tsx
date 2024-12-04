@@ -61,7 +61,6 @@ export const SearchInputModal = () => {
   };
 
   const closeModal = () => {
-    console.log("close");
     setModalIsOpen(false);
   };
 

@@ -9,7 +9,6 @@ export const Calender = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   
   const onDateClick = useCallback((newDate: Date) => {
-    console.log(newDate, "clicked cell value");
     setSelectedDate(newDate);
   }, []);
 

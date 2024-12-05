@@ -1,9 +1,11 @@
+import React, { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import AppLayout from "./Layout";
 import routes from "./routes";
 import NotFoundPage from "./pages/page404";
 import PathConstants from "./routes/pathConstants";
-import React, { Suspense } from "react";
 
 const Login = React.lazy(() => import("../src/pages/Login"));
 
@@ -28,7 +30,10 @@ function App() {
   ]);
 
   return (
+    <div>
+      <ToastContainer />
       <RouterProvider router={router} />
+    </div>
   );
 }
 

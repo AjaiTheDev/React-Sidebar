@@ -21,10 +21,9 @@ export interface HeaderProps {
  *
  * @returns {JSX.Element} The rendered Header component.
  *
- * @example
- * <Header isMediumDevice={true} />
+ * @example <Header isMediumDevice={true} />
  */
-export const Header: React.FC<HeaderProps> = ({ isMediumDevice }) => {
+export const Header: React.FC<HeaderProps> = ({ isMediumDevice }: HeaderProps): JSX.Element => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   const handleSideBarToggle = (): void => {

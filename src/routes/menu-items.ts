@@ -27,4 +27,10 @@ export const menuItems: IMenuItems[] = [
     icon: "",
     roles: [Roles.ADMIN],
   },
+  {
+    name: "Manage Holidays",
+    route: PathConstants.MANAGE_HOLIDAYS,
+    icon: "",
+    roles: [],
+  },
 ];

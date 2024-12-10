@@ -12,10 +12,12 @@ import AuthGuard from "../utils/guards/auth-guard";
  */
 const Home = React.lazy(() => import("../pages/home"));
 const About = React.lazy(() => import("../pages/about"));
+const ManageHolidays = React.lazy(() => import("../pages/manage-holidays"))
 
 const componentsMap: Record<string, JSX.Element> = {
   [PathConstants.HOME]: <Home />,
   [PathConstants.ABOUT]: <About />,
+  [PathConstants.MANAGE_HOLIDAYS]: <ManageHolidays />
 };
 
 // Generate routes dynamically

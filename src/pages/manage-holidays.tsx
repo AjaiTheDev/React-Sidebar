@@ -1,19 +1,22 @@
-import React, { useCallback, useState } from "react";
+import Holidays, { HolidaysTypes} from "date-holidays";
+import React, { useCallback, useMemo, useState } from "react";
 
 export interface OptionsProps {
   id: string;
   label: string;
 }
 
-const options: OptionsProps[] = [
-  { id: "option1", label: "Option 1" },
-  { id: "option2", label: "Option 2" },
-  { id: "option3", label: "Option 3" },
-  { id: "option4", label: "Option 4" },
-];
-
 export const ManageHolidays: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const currentYear = new Date().getFullYear();
+  const hd = new Holidays()
+
+  const options: HolidaysTypes.Holiday[] = useMemo(() => {
+    console.log('use memo test')
+    hd.init('Us');
+    const holidays = hd.getHolidays();
+    return holidays;
+  },[currentYear]);
 
   const handleCheckBoxClick = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,22 +36,22 @@ export const ManageHolidays: React.FC = () => {
         Mange Holidays
       </h1>
       <div className="flex flex-col px-2">
-        {options?.map((item: OptionsProps) => (
-          <div key={item.id} className="flex flex-row gap-x-3 items-center">
+        {options?.map((item: HolidaysTypes.Holiday) => (
+          <div key={item.name} className="flex flex-row gap-x-3 items-center">
             <input
               type="checkbox"
               className="h-5 w-5 rounded border-gray-300 text-blue-600  focus:ring-blue-500"
-              name={item?.label}
-              id={item.id}
-              checked={selectedOptions?.includes(item?.id)}
-              value={item?.id}
+              name={item?.name}
+              id={item.name}
+              checked={selectedOptions?.includes(item?.name)}
+              value={item?.name}
               onChange={handleCheckBoxClick}
             />
             <label
-              htmlFor={item.label}
+              htmlFor={item.name}
               className="text-[20px] text-gray-700 cursor-pointer"
             >
-              {item?.label}
+              {item?.name}
             </label>
           </div>
         ))}
